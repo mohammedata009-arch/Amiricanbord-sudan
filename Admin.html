@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>طلب شهادة</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Cairo',sans-serif;
+    background:#eef2f7;
+}
+
+/* شريط الرسوم */
+.notice{
+    background:#0b2e4a;
+    color:white;
+    text-align:center;
+    padding:12px;
+    font-size:14px;
+}
+
+/* الحاوية */
+.container{
+    display:flex;
+    justify-content:center;
+    padding:30px 15px;
+}
+
+/* الكرت */
+.card{
+    background:white;
+    width:420px;
+    max-width:100%;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#25D366;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1da851;
+}
+
+h2{
+    margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- الرسوم -->
+<div class="notice">
+⚠️ رسوم استخراج الشهادة: 100,000 جنيه سوداني | الحساب: 2473368 | محمد طه عطا المنان
+</div>
+
+<div class="container">
+<div class="card">
+
+<h2>طلب شهادة رسمية</h2>
+
+<input type="text" id="name" placeholder="الاسم رباعي بالإنجليزية">
+<input type="text" id="address" placeholder="السكن">
+<input type="text" id="transaction" placeholder="رقم العملية">
+
+<button onclick="sendWhatsApp()">الحصول على الشهادة</button>
+
+</div>
+</div>
+
+<script>
+
+/* إرسال واتساب (نسخة مضمونة للموبايل) */
+function sendWhatsApp(){
+
+    let name = document.getElementById("name").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let transaction = document.getElementById("transaction").value.trim();
+
+    if(name === "" || address === "" || transaction === ""){
+        alert("أكمل كل البيانات");
+        return;
+    }
+
+    let msg =
+`طلب شهادة رسمية
+الاسم: ${name}
+السكن: ${address}
+رقم العملية: ${transaction}
+الرسوم: 100,000 جنيه`;
+
+    let phone = "249901946410";
+
+    // ✅ الأفضل للموبايل
+    let url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + encodeURIComponent(msg);
+
+    window.location.href = url;
+}
+
+</script>
+
+</body>
+</html>
