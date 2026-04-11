@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Board for Languages</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    background: #f5f7fa;
+}
+
+header {
+    background: linear-gradient(to left, #003366, #0059b3);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background: #002244;
+}
+
+nav a {
+    color: white;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background: #0059b3;
+}
+
+.lang-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 15px;
+    background: #ffcc00;
+    border: none;
+    cursor: pointer;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644') no-repeat center;
+    background-size: cover;
+    color: white;
+}
+
+.section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+footer {
+    background: #002244;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<button class="lang-btn" onclick="toggleLang()">English</button>
+
+<header>
+    <h1 id="title">البورد الأمريكي للغات</h1>
+    <p id="subtitle">تعلم اللغات باحترافية عالمية</p>
+</header>
+
+<nav>
+    <a id="nav1">الرئيسية</a>
+    <a id="nav2">الدورات</a>
+    <a id="nav3">الخدمات</a>
+    <a id="nav4">تواصل معنا</a>
+</nav>
+
+<section class="hero">
+    <h1 id="heroTitle">ابدأ رحلتك في تعلم اللغات</h1>
+    <p id="heroText">كورسات معتمدة بأسلوب حديث</p>
+</section>
+
+<section class="section">
+    <h2 id="coursesTitle">الدورات المتاحة</h2>
+    <div class="cards">
+        <div class="card"><h3 id="c1">اللغة الإنجليزية</h3></div>
+        <div class="card"><h3 id="c2">اللغة الفرنسية</h3></div>
+        <div class="card"><h3 id="c3">اللغة الألمانية</h3></div>
+    </div>
+</section>
+
+<section class="section" style="background:#eef2f7;">
+    <h2 id="servicesTitle">خدماتنا</h2>
+    <div class="cards">
+        <div class="card"><h3 id="s1">اختبار تحديد المستوى</h3></div>
+        <div class="card"><h3 id="s2">شهادات معتمدة</h3></div>
+        <div class="card"><h3 id="s3">مدربين محترفين</h3></div>
+    </div>
+</section>
+
+<!-- قسم الشهادات -->
+<section class="section">
+    <h2 id="certTitle">الشهادات</h2>
+    <div class="cards">
+        <div class="card">
+            <h3 id="cert1">شهادة اللغة الإنجليزية</h3>
+            <p id="cert1desc">معتمدة دولياً لإثبات الكفاءة</p>
+        </div>
+
+        <div class="card">
+            <h3 id="cert2">شهادة اللغة الفرنسية</h3>
+            <p id="cert2desc">مناسبة للدراسة والعمل</p>
+        </div>
+
+        <div class="card">
+            <h3 id="cert3">شهادة اللغة الألمانية</h3>
+            <p id="cert3desc">مطلوبة للهجرة والتعليم</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 id="contactTitle">تواصل معنا</h2>
+    <p id="email">البريد الإلكتروني: info@ablanguages.com</p>
+</section>
+
+<footer>
+    <p id="footer">© 2026 جميع الحقوق محفوظة</p>
+</footer>
+
+<script>
+let isArabic = true;
+
+function toggleLang() {
+    isArabic = !isArabic;
+
+    if (!isArabic) {
+        document.documentElement.lang = "en";
+        document.documentElement.dir = "ltr";
+
+        document.querySelector(".lang-btn").innerText = "العربية";
+
+        document.getElementById("title").innerText = "American Board for Languages";
+        document.getElementById("subtitle").innerText = "Learn languages professionally";
+
+        document.getElementById("nav1").innerText = "Home";
+        document.getElementById("nav2").innerText = "Courses";
+        document.getElementById("nav3").innerText = "Services";
+        document.getElementById("nav4").innerText = "Contact";
+
+        document.getElementById("heroTitle").innerText = "Start Your Language Journey";
+        document.getElementById("heroText").innerText = "Certified modern courses";
+
+        document.getElementById("coursesTitle").innerText = "Available Courses";
+        document.getElementById("c1").innerText = "English Language";
+        document.getElementById("c2").innerText = "French Language";
+        document.getElementById("c3").innerText = "German Language";
+
+        document.getElementById("servicesTitle").innerText = "Our Services";
+        document.getElementById("s1").innerText = "Placement Test";
+        document.getElementById("s2").innerText = "Certified Certificates";
+        document.getElementById("s3").innerText = "Professional Trainers";
+
+        document.getElementById("certTitle").innerText = "Certificates";
+        document.getElementById("cert1").innerText = "English Certificate";
+        document.getElementById("cert1desc").innerText = "Internationally recognized";
+
+        document.getElementById("cert2").innerText = "French Certificate";
+        document.getElementById("cert2desc").innerText = "For study and work";
+
+        document.getElementById("cert3").innerText = "German Certificate";
+        document.getElementById("cert3desc").innerText = "Required for migration and education";
+
+        document.getElementById("contactTitle").innerText = "Contact Us";
+        document.getElementById("email").innerText = "Email: info@ablanguages.com";
+
+        document.getElementById("footer").innerText = "© 2026 All Rights Reserved";
+
+    } else {
+        location.reload();
+    }
+}
+</script>
+
+</body>
+</html>
