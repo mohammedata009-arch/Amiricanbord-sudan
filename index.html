@@ -1,217 +1,267 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>American Board for Languages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار التميز الإداري - منصة البرامج المتخصصة</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #00b894;
+            --accent: #fdcb6e;
+            --dark: #2d3436;
+            --light: #dfe6e9;
+            --white: #ffffff;
+            --wa-color: #25D366;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark);
+            padding: 10px;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Cairo', sans-serif;
-    background: #f5f7fa;
-}
+        #main-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 550px;
+            padding: 35px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-header {
-    background: linear-gradient(to left, #003366, #0059b3);
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
+        #main-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 8px;
+            background: linear-gradient(to right, var(--accent), var(--secondary), var(--primary));
+        }
 
-nav {
-    display: flex;
-    justify-content: center;
-    background: #002244;
-}
+        h1 { color: var(--primary); margin-bottom: 5px; font-size: 1.7rem; }
+        .subtitle { color: #636e72; margin-bottom: 25px; font-size: 0.9rem; }
 
-nav a {
-    color: white;
-    padding: 15px 20px;
-    text-decoration: none;
-}
+        .progress-container {
+            background: var(--light);
+            height: 10px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            background: var(--secondary);
+            width: 0%;
+            height: 100%;
+            transition: width 0.4s ease;
+        }
 
-nav a:hover {
-    background: #0059b3;
-}
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            min-height: 50px;
+            color: var(--dark);
+        }
 
-.lang-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 8px 15px;
-    background: #ffcc00;
-    border: none;
-    cursor: pointer;
-}
+        .options-grid { display: grid; gap: 12px; }
+        
+        .opt-btn {
+            padding: 16px;
+            border: 2px solid var(--light);
+            border-radius: 15px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
 
-.hero {
-    text-align: center;
-    padding: 80px 20px;
-    background: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644') no-repeat center;
-    background-size: cover;
-    color: white;
-}
+        .opt-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            background: #f9f8ff;
+        }
 
-.section {
-    padding: 50px 20px;
-    text-align: center;
-}
+        .correct { background: var(--secondary) !important; color: white; border-color: var(--secondary) !important; }
+        .wrong { background: #ff7675 !important; color: white; border-color: #ff7675 !important; }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+        #result-screen { display: none; }
+        .score-circle {
+            width: 110px; height: 110px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            box-shadow: 0 10px 20px rgba(253, 203, 110, 0.4);
+        }
 
-.card {
-    background: white;
-    margin: 10px;
-    padding: 20px;
-    width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--light);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 12px;
+            outline: none;
+        }
 
-footer {
-    background: #002244;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
+        .fee-badge {
+            background: #fff9e6;
+            color: #d35400;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border: 1px dashed var(--accent);
+            font-size: 0.95rem;
+        }
 
-@media (max-width: 768px) {
-    .cards {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-</style>
+        .btn-wa {
+            background: var(--wa-color);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 15px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer-text { margin-top: 20px; font-size: 0.8rem; color: #b2bec3; }
+
+        @media print { .btn-wa, input, .progress-container, h1 { display: none; } }
+    </style>
 </head>
-
 <body>
 
-<button class="lang-btn" onclick="toggleLang()">English</button>
-
-<header>
-    <h1 id="title">البورد الأمريكي للغات</h1>
-    <p id="subtitle">تعلم اللغات باحترافية عالمية</p>
-</header>
-
-<nav>
-    <a id="nav1">الرئيسية</a>
-    <a id="nav2">الدورات</a>
-    <a id="nav3">الخدمات</a>
-    <a id="nav4">تواصل معنا</a>
-</nav>
-
-<section class="hero">
-    <h1 id="heroTitle">ابدأ رحلتك في تعلم اللغات</h1>
-    <p id="heroText">كورسات معتمدة بأسلوب حديث</p>
-</section>
-
-<section class="section">
-    <h2 id="coursesTitle">الدورات المتاحة</h2>
-    <div class="cards">
-        <div class="card"><h3 id="c1">اللغة الإنجليزية</h3></div>
-        <div class="card"><h3 id="c2">اللغة الفرنسية</h3></div>
-        <div class="card"><h3 id="c3">اللغة الألمانية</h3></div>
-    </div>
-</section>
-
-<section class="section" style="background:#eef2f7;">
-    <h2 id="servicesTitle">خدماتنا</h2>
-    <div class="cards">
-        <div class="card"><h3 id="s1">اختبار تحديد المستوى</h3></div>
-        <div class="card"><h3 id="s2">شهادات معتمدة</h3></div>
-        <div class="card"><h3 id="s3">مدربين محترفين</h3></div>
-    </div>
-</section>
-
-<!-- قسم الشهادات -->
-<section class="section">
-    <h2 id="certTitle">الشهادات</h2>
-    <div class="cards">
-        <div class="card">
-            <h3 id="cert1">شهادة اللغة الإنجليزية</h3>
-            <p id="cert1desc">معتمدة دولياً لإثبات الكفاءة</p>
+<div id="main-card">
+    <div id="quiz-screen">
+        <h1>🏆 اختبار التميز الإداري</h1>
+        <p class="subtitle">إشراف الأستاذ محمد طه عطا المنان</p>
+        
+        <div class="progress-container">
+            <div id="progress-bar"></div>
         </div>
 
-        <div class="card">
-            <h3 id="cert2">شهادة اللغة الفرنسية</h3>
-            <p id="cert2desc">مناسبة للدراسة والعمل</p>
-        </div>
-
-        <div class="card">
-            <h3 id="cert3">شهادة اللغة الألمانية</h3>
-            <p id="cert3desc">مطلوبة للهجرة والتعليم</p>
-        </div>
+        <div id="question" class="question-text">تحميل الأسئلة...</div>
+        <div id="options" class="options-grid"></div>
     </div>
-</section>
 
-<section class="section">
-    <h2 id="contactTitle">تواصل معنا</h2>
-    <p id="email">البريد الإلكتروني: info@ablanguages.com</p>
-</section>
+    <div id="result-screen">
+        <div class="score-circle" id="final-score">0</div>
+        <h2 id="congrats-msg">أحسنتم يا متدربين!</h2>
+        <p>اكتب اسمك الثلاثي لطلب الشهادة المعتمدة</p>
+        
+        <input type="text" id="trainee-name" placeholder="أدخل اسمك هنا">
+        
+        <div class="fee-badge">
+            🎫 رسوم الشهادة المعتمدة: 7,000 جنيه سوداني
+        </div>
 
-<footer>
-    <p id="footer">© 2026 جميع الحقوق محفوظة</p>
-</footer>
+        <button class="btn-wa" onclick="sendWhatsApp()">
+            ارسل النتيجة للواتساب واتحصل على شهادتك
+        </button>
+        
+        <p class="footer-text">منصة البرامج المتخصصة © 2026</p>
+    </div>
+</div>
+
+<audio id="s-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="s-wrong" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
 
 <script>
-let isArabic = true;
+    const quizData = [
+        { q: "ما هي أول وظائف الإدارة وبدونها تضيع الجهود؟", a: ["التنظيم", "التخطيط", "الرقابة"], c: 1 },
+        { q: "توزيع المهام والصلاحيات على المتدربين يسمى:", a: ["التنظيم", "التوجيه", "البيع"], c: 0 },
+        { q: "الرقابة الناجحة تهدف أساساً إلى:", a: ["عقاب الموظف", "تصحيح الانحرافات", "إيقاف العمل"], c: 1 },
+        { q: "الإدارة هي فن إنجاز الأعمال من خلال:", a: ["الآلات فقط", "الآخرين", "الجلوس في المكتب"], c: 1 },
+        { q: "المدير الذي يستشير فريقه قبل القرار يطبق مبدأ:", a: ["الضعف", "الشورى والتمكين", "التسلط"], c: 1 },
+        { q: "أهم عنصر في نجاح المؤسسة هو العنصر:", a: ["البشري", "المادي", "التقني"], c: 0 },
+        { q: "القدرة على إلهام وتحفيز الفريق تسمى:", a: ["ديكتاتورية", "قيادة", "تسويق"], c: 1 },
+        { q: "فهم العميل واحتياجاته هو جوهر علم:", a: ["الإدارة", "التسويق", "المحاسبة"], c: 1 },
+        { q: "عند وقوع خطأ من موظف، المدير الناجح ينصحه بـ:", a: ["علن أمام الناس", "الستر والخصوصية", "الخصم فوراً"], c: 1 },
+        { q: "السر الحقيقي لاستمرار نجاح أي مدير أو موظف هو:", a: ["التوقف عن الدراسة", "التطوير المستمر والتعلم", "تجنب المسؤولية"], c: 1 }
+    ];
 
-function toggleLang() {
-    isArabic = !isArabic;
+    let current = 0;
+    let score = 0;
 
-    if (!isArabic) {
-        document.documentElement.lang = "en";
-        document.documentElement.dir = "ltr";
-
-        document.querySelector(".lang-btn").innerText = "العربية";
-
-        document.getElementById("title").innerText = "American Board for Languages";
-        document.getElementById("subtitle").innerText = "Learn languages professionally";
-
-        document.getElementById("nav1").innerText = "Home";
-        document.getElementById("nav2").innerText = "Courses";
-        document.getElementById("nav3").innerText = "Services";
-        document.getElementById("nav4").innerText = "Contact";
-
-        document.getElementById("heroTitle").innerText = "Start Your Language Journey";
-        document.getElementById("heroText").innerText = "Certified modern courses";
-
-        document.getElementById("coursesTitle").innerText = "Available Courses";
-        document.getElementById("c1").innerText = "English Language";
-        document.getElementById("c2").innerText = "French Language";
-        document.getElementById("c3").innerText = "German Language";
-
-        document.getElementById("servicesTitle").innerText = "Our Services";
-        document.getElementById("s1").innerText = "Placement Test";
-        document.getElementById("s2").innerText = "Certified Certificates";
-        document.getElementById("s3").innerText = "Professional Trainers";
-
-        document.getElementById("certTitle").innerText = "Certificates";
-        document.getElementById("cert1").innerText = "English Certificate";
-        document.getElementById("cert1desc").innerText = "Internationally recognized";
-
-        document.getElementById("cert2").innerText = "French Certificate";
-        document.getElementById("cert2desc").innerText = "For study and work";
-
-        document.getElementById("cert3").innerText = "German Certificate";
-        document.getElementById("cert3desc").innerText = "Required for migration and education";
-
-        document.getElementById("contactTitle").innerText = "Contact Us";
-        document.getElementById("email").innerText = "Email: info@ablanguages.com";
-
-        document.getElementById("footer").innerText = "© 2026 All Rights Reserved";
-
-    } else {
-        location.reload();
+    function renderQuestion() {
+        if (current >= quizData.length) {
+            showResults();
+            return;
+        }
+        
+        const q = quizData[current];
+        document.getElementById("question").innerText = q.q;
+        document.getElementById("progress-bar").style.width = ((current + 1) / quizData.length * 100) + "%";
+        
+        const optsDiv = document.getElementById("options");
+        optsDiv.innerHTML = "";
+        
+        q.a.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.className = "opt-btn";
+            btn.innerText = opt;
+            btn.onclick = () => check(i, btn);
+            optsDiv.appendChild(btn);
+        });
     }
-}
+
+    function check(idx, btn) {
+        const correct = quizData[current].c;
+        const allBtns = document.querySelectorAll(".opt-btn");
+        allBtns.forEach(b => b.disabled = true);
+
+        if (idx === correct) {
+            btn.classList.add("correct");
+            document.getElementById("s-correct").play();
+            score++;
+        } else {
+            btn.classList.add("wrong");
+            allBtns[correct].classList.add("correct");
+            document.getElementById("s-wrong").play();
+        }
+
+        setTimeout(() => {
+            current++;
+            renderQuestion();
+        }, 1100);
+    }
+
+    function showResults() {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+        document.getElementById("final-score").innerText = score;
+        
+        if(score < 5) document.getElementById("congrats-msg").innerText = "فرصة سعيدة، حاول مجدداً!";
+    }
+
+    function sendWhatsApp() {
+        const name = document.getElementById("trainee-name").value;
+        if (!name) { alert("لطفاً اكتب اسمك أولاً"); return; }
+        
+        const msg = encodeURIComponent(`السلام عليكم أستاذ محمد طه،\nأنا المتدرب: ${name}\nأكملت اختبار الإدارة بنجاح.\nالنتيجة: ${score} من 10\nأرغب في طلب الشهادة المعتمدة.`);
+        window.open(`https://wa.me/249999240574?text=${msg}`);
+    }
+
+    renderQuestion();
 </script>
 
 </body>
