@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار دورة قوة التحفيز - الأستاذ محمد طه</title>
+    <title>اختبار احتراف التحليل الاستراتيجي - المطور</title>
     <style>
         :root {
-            --primary: #6c5ce7;
-            --secondary: #00b894;
-            --accent: #fdcb6e;
+            --primary: #2c3e50;
+            --secondary: #e67e22;
+            --accent: #f1c40f;
             --dark: #2d3436;
-            --light: #dfe6e9;
+            --light: #f4f7f6;
             --white: #ffffff;
             --wa-color: #25D366;
+            --success: #27ae60;
+            --error: #e74c3c;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             margin: 0;
             display: flex;
             justify-content: center;
@@ -30,132 +32,76 @@
         #main-card {
             background: var(--white);
             width: 100%;
-            max-width: 550px;
-            padding: 35px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
-        #main-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 8px;
-            background: linear-gradient(to right, var(--accent), var(--secondary), var(--primary));
-        }
+        h1 { color: var(--primary); margin: 0; font-size: 1.5rem; border-bottom: 3px solid var(--secondary); display: inline-block; padding-bottom: 5px; }
+        .subtitle { color: #7f8c8d; margin: 10px 0 20px; font-size: 0.85rem; }
 
-        h1 { color: var(--primary); margin-bottom: 5px; font-size: 1.7rem; }
-        .subtitle { color: #636e72; margin-bottom: 25px; font-size: 0.9rem; }
+        .progress-container { background: #eee; height: 8px; border-radius: 10px; margin-bottom: 20px; }
+        #progress-bar { background: var(--secondary); width: 0%; height: 100%; border-radius: 10px; transition: width 0.4s; }
 
-        .progress-container {
-            background: var(--light);
-            height: 10px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-        #progress-bar {
-            background: var(--secondary);
-            width: 0%;
-            height: 100%;
-            transition: width 0.4s ease;
-        }
+        .question-text { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; min-height: 50px; line-height: 1.5; }
 
-        .question-text {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-            min-height: 50px;
-            color: var(--dark);
-            line-height: 1.5;
-        }
-
-        .options-grid { display: grid; gap: 12px; }
-        
+        .options-grid { display: grid; gap: 10px; }
         .opt-btn {
-            padding: 16px;
-            border: 2px solid var(--light);
-            border-radius: 15px;
+            padding: 14px;
+            border: 2px solid #ecf0f1;
+            border-radius: 12px;
             background: var(--white);
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            transition: all 0.2s ease;
+            transition: 0.2s;
             text-align: right;
         }
+        .opt-btn:hover { border-color: var(--secondary); background: #fdf2e9; }
+        
+        .correct { background: var(--success) !important; color: white; border-color: var(--success) !important; }
+        .wrong { background: var(--error) !important; color: white; border-color: var(--error) !important; }
 
-        .opt-btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-            background: #f9f8ff;
+        #explanation-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #e8f4fd;
+            border-right: 5px solid #3498db;
+            text-align: right;
+            font-size: 0.95rem;
+            animation: fadeIn 0.5s;
         }
-
-        .correct { background: var(--secondary) !important; color: white; border-color: var(--secondary) !important; }
-        .wrong { background: #ff7675 !important; color: white; border-color: #ff7675 !important; }
 
         #result-screen { display: none; }
-        .score-circle {
-            width: 110px; height: 110px;
-            background: var(--accent);
-            color: var(--dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin: 0 auto 15px;
-            box-shadow: 0 10px 20px rgba(253, 203, 110, 0.4);
-        }
+        .score-circle { width: 90px; height: 90px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin: 0 auto 15px; }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid var(--light);
-            border-radius: 12px;
-            font-size: 1.1rem;
-            text-align: center;
-            margin-bottom: 12px;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .fee-badge {
+        .fee-info {
             background: #fff9e6;
             color: #d35400;
             padding: 12px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin: 15px 0;
             border: 1px dashed var(--accent);
-            font-size: 0.95rem;
         }
 
-        .btn-wa {
-            background: var(--wa-color);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 15px;
-            width: 100%;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+        input[type="text"] { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 10px; margin-bottom: 10px; box-sizing: border-box; text-align: center; font-size: 1rem; }
 
-        .footer-text { margin-top: 20px; font-size: 0.8rem; color: #b2bec3; }
+        .btn-wa { background: var(--wa-color); color: white; border: none; padding: 16px; border-radius: 12px; width: 100%; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
 
-        @media print { .btn-wa, input, .progress-container, h1 { display: none; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <div id="main-card">
     <div id="quiz-screen">
-        <h1>🏆 اختبار قوة التحفيز</h1>
+        <h1>🎓 التحليل الاستراتيجي الاحترافي</h1>
         <p class="subtitle">إشراف الأستاذ محمد طه عطا المنان</p>
         
         <div class="progress-container">
@@ -164,82 +110,90 @@
 
         <div id="question" class="question-text">تحميل الأسئلة...</div>
         <div id="options" class="options-grid"></div>
+        <div id="explanation-box"></div>
     </div>
 
     <div id="result-screen">
         <div class="score-circle" id="final-score">0</div>
         <h2 id="congrats-msg">أحسنتم يا متدربين!</h2>
-        <p>اكتبوا أسماءكم الثلاثية لطلب الشهادة المعتمدة</p>
+        <p>الرجاء إدخال اسمكم الثلاثي أدناه</p>
         
-        <input type="text" id="trainee-name" placeholder="أدخل اسمك هنا">
+        <input type="text" id="trainee-name" placeholder="الاسم الثلاثي للمتدرب">
         
-        <div class="fee-badge">
-            🎫 رسوم الشهادة المعتمدة: 7,000 جنيه سوداني
+        <div class="fee-info">
+            🎫 رسوم استخراج الشهادة المعتمدة: 7,000 جنيه سوداني
         </div>
 
         <button class="btn-wa" onclick="sendWhatsApp()">
-            ارسلوا النتيجة للواتساب واستلموا الشهادة
+            إرسال النتيجة وطلب الشهادة
         </button>
-        
-        <p class="footer-text">منصة البرامج المتخصصة © 2026</p>
     </div>
 </div>
 
-<audio id="s-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
-<audio id="s-wrong" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
+<audio id="sound-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="sound-wrong" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
 
 <script>
-    // الأسئلة مستخرجة بدقة من محاور الصور المرفقة
     const quizData = [
         { 
-            q: "يا متدربين، أي مما يلي يعد من فوائد التحفيز وأهميته في بيئة العمل؟", 
-            a: ["زيادة إنتاجية الموظفين", "رفع معدل الاستقالات", "زيادة التعب النفسي"], 
-            c: 0 
+            q: "يا متدربين، ما هو التركيز الأساسي لتحليل PESTEL؟", 
+            a: ["تحليل نقاط القوة والضعف الداخلية", "فحص البيئة الخارجية الكلية (سياسي، اقتصادي، إلخ)", "تحديد رواتب الموظفين"], 
+            c: 1,
+            exp: "شرح: تحليل PESTEL يركز حصرياً على العوامل الخارجية التي لا تملك المنظمة سيطرة عليها لكنها تؤثر في قراراتها بعيدة المدى."
         },
         { 
-            q: "حسب المحور الثاني، ما هي النظرية التي تفسر الدوافع الإنسانية الأساسية؟", 
-            a: ["نظرية المؤامرة", "نظرية ماسلو", "نظرية النسبية"], 
-            c: 1 
+            q: "في مصفوفة BCG، ماذا تعني فئة 'الأبقار الحلوب' (Cash Cows)؟", 
+            a: ["منتجات في سوق ينمو بسرعة وبحصة منخفضة", "منتجات في سوق ينمو ببطء ولكن حصتها السوقية عالية", "منتجات خاسرة يجب التخلص منها"], 
+            c: 1,
+            exp: "شرح: الأبقار الحلوب تدر أرباحاً كبيرة وتستخدم هذه الأموال لتمويل مشاريع أخرى (النجوم أو علامات الاستفهام)."
         },
         { 
-            q: "ينقسم التحفيز في علم النفس إلى نوعين رئيسيين، ما هما؟", 
-            a: ["سريع وبطيء", "مادي وفوري", "داخلي وخارجي"], 
-            c: 2 
+            q: "حسب نموذج بورتر، متى تزداد قوة 'المشترون' (العملاء)؟", 
+            a: ["عندما يكون لديهم خيارات بديلة كثيرة وسهولة في التنقل", "عندما يكون المنتج نادراً جداً", "عندما يقل عدد المنافسين"], 
+            c: 0,
+            exp: "شرح: كلما توفرت البدائل (السوشيال ميديا مثلاً)، زادت قدرة العميل على التفاوض وفرض شروطه."
         },
         { 
-            q: "من مهارات التحفيز والقيادة، كيف تمنحون فريقكم القوة في الأداء؟", 
-            a: ["عن طريق منح الفريق الثقة والحرية في التنفيذ", "عن طريق المراقبة اللصيقة لكل حركة", "عن طريق تجنب مكافأة الإنجازات"], 
-            c: 0 
+            q: "ماذا يقصد بـ 'المحيط الأزرق' في الاستراتيجية؟", 
+            a: ["سوق مليء بالمنافسين والدماء", "سوق مبتكر وجديد لا منافس فيه حالياً", "تخفيض الأسعار لأدنى مستوى"], 
+            c: 1,
+            exp: "شرح: المحيط الأزرق هو الهروب من المنافسة المباشرة بخلق قيمة فريدة تجعل المنافسة 'غير ذات صلة'."
         },
         { 
-            q: "في المحور الرابع المتعلق بالتسويق، ما هو المفتاح الأساسي لتحفيز العملاء؟", 
-            a: ["إهمال رغباتهم", "فهم دوافع العميل (العاطفية والعملية)", "تصميم حملات عشوائية"], 
-            c: 1 
+            q: "في تحليل SWOT، تعتبر 'القوانين الحكومية الجديدة' عاملاً:", 
+            a: ["داخلياً (نقاط قوة أو ضعف)", "خارجياً (فرص أو تهديدات)", "غير مهم في التحليل"], 
+            c: 1,
+            exp: "شرح: العوامل السياسية والقانونية هي عوامل خارجية تظهر في تحليل PESTEL وتنعكس في SWOT كفرص أو تهديدات."
         },
         { 
-            q: "كيف يؤثر التحفيز والطب والعافية على أداء الدماغ؟", 
-            a: ["النشاط البدني لا علاقة له بالدماغ", "التغذية السيئة تزيد التركيز", "النشاط البدني والنوم الكافي يعززان المزاج والطاقة"], 
-            c: 2 
+            q: "ما هي استراتيجية 'التنويع' في مصفوفة أنسوف (Ansoff)؟", 
+            a: ["بيع منتج حالي في سوق حالي", "بيع منتج جديد في سوق جديد تماماً", "تطوير المنتج الحالي فقط"], 
+            c: 1,
+            exp: "شرح: التنويع هو الخيار الأكثر مخاطرة لأنه يتطلب دخول أسواق جديدة بمنتجات لم يسبق للشركة إنتاجها."
         },
         { 
-            q: "يا متدربين، ما هي مواصفات الأهداف التي تعتبر أداة عملية للتحفيز؟", 
-            a: ["أهداف غامضة وصعبة", "أهداف واضحة وقابلة للقياس", "أهداف بدون وقت محدد"], 
-            c: 1 
+            q: "ما الهدف من مصفوفة TOWS؟", 
+            a: ["مجرد رصد المعلومات", "تحويل تحليل SWOT إلى قرارات واستراتيجيات فعلية", "حساب أرباح السنة الماضية"], 
+            c: 1,
+            exp: "شرح: TOWS لا تكتفي بالرصد، بل تربط القوة بالفرصة (هجوم) والضعف بالتهديد (بقاء)."
         },
         { 
-            q: "أي من هذه الأدوات العملية تساعد في تعزيز روح الفريق؟", 
-            a: ["التغذية الراجعة الإيجابية", "التحفيز الفردي فقط", "تجاهل المبادرات"], 
-            c: 0 
+            q: "في نموذج VRIO، ماذا يعني حرف (R)؟", 
+            a: ["العائد (Returns)", "الندرة (Rareness)", "المخاطرة (Risk)"], 
+            c: 1,
+            exp: "شرح: الندرة تعني أن المورد لا يملكه جميع المنافسين، مما يمنح الشركة ميزة تنافسية."
         },
         { 
-            q: "في محور القيادة، ماذا يجب عليكم فعله تجاه الإنجازات والمبادرات؟", 
-            a: ["تجاهلها لعدم الغرور", "مكافأتها وتشجيعها", "تأجيل شكرها لسنوات"], 
-            c: 1 
+            q: "أي من هذه العناصر يتبع لـ 'الأنشطة الأساسية' في سلسلة القيمة؟", 
+            a: ["إدارة الموارد البشرية", "العمليات والتصنيع والتسويق", "البنية التحتية للمنظمة"], 
+            c: 1,
+            exp: "شرح: الأنشطة الأساسية هي التي تساهم مباشرة في خلق المنتج وبيعه، أما الموارد البشرية فهي نشاط داعم."
         },
         { 
-            q: "ما هو المحرك الأساسي الذي يدفع الأفراد والمنظمات نحو النجاح حسب المقدمة؟", 
-            a: ["الروتين اليومي", "قوة التحفيز", "المنافسة السلبية"], 
-            c: 1 
+            q: "يا متدربين، التحليل الاستراتيجي ليس عملية حسابية بل هو:", 
+            a: ["تخمين عشوائي", "تفكير نقدي يربط القوة الداخلية بالفرص الخارجية", "حفظ المصطلحات فقط"], 
+            c: 1,
+            exp: "شرح: الاحتراف يكمن في ربط الأدوات ببعضها لصناعة منظومة متكاملة تحقق الميزة المستدامة."
         }
     ];
 
@@ -247,13 +201,11 @@
     let score = 0;
 
     function renderQuestion() {
-        if (current >= quizData.length) {
-            showResults();
-            return;
-        }
+        if (current >= quizData.length) { showResults(); return; }
         
         const q = quizData[current];
         document.getElementById("question").innerText = q.q;
+        document.getElementById("explanation-box").style.display = "none";
         document.getElementById("progress-bar").style.width = ((current + 1) / quizData.length * 100) + "%";
         
         const optsDiv = document.getElementById("options");
@@ -270,38 +222,41 @@
 
     function check(idx, btn) {
         const correct = quizData[current].c;
+        const explanation = quizData[current].exp;
         const allBtns = document.querySelectorAll(".opt-btn");
         allBtns.forEach(b => b.disabled = true);
 
+        const expBox = document.getElementById("explanation-box");
+        expBox.innerText = explanation;
+        expBox.style.display = "block";
+
         if (idx === correct) {
             btn.classList.add("correct");
-            document.getElementById("s-correct").play();
+            document.getElementById("sound-correct").play();
             score++;
         } else {
             btn.classList.add("wrong");
             allBtns[correct].classList.add("correct");
-            document.getElementById("s-wrong").play();
+            document.getElementById("sound-wrong").play();
         }
 
         setTimeout(() => {
             current++;
             renderQuestion();
-        }, 1100);
+        }, 4000); // إعطاء 4 ثوانٍ لقراءة الشرح
     }
 
     function showResults() {
         document.getElementById("quiz-screen").style.display = "none";
         document.getElementById("result-screen").style.display = "block";
-        document.getElementById("final-score").innerText = score;
-        
-        if(score < 5) document.getElementById("congrats-msg").innerText = "فرصة سعيدة، حاولوا مجدداً يا متدربين!";
+        document.getElementById("final-score").innerText = score + " / " + quizData.length;
     }
 
     function sendWhatsApp() {
         const name = document.getElementById("trainee-name").value;
-        if (!name) { alert("لطفاً اكتبوا أسماءكم أولاً يا متدربين"); return; }
+        if (!name) { alert("لطفاً اكتبوا أسماءكم يا متدربين"); return; }
         
-        const msg = encodeURIComponent(`السلام عليكم أستاذ محمد طه،\nأنا المتدرب(ة): ${name}\nأتممت اختبار دورة "قوة التحفيز" بنجاح.\nالنتيجة: ${score} من 10\nأرغب في الحصول على الشهادة المعتمدة.`);
+        const msg = encodeURIComponent(`السلام عليكم أستاذ محمد طه،\nأنا المتدرب: ${name}\nأكملت اختبار "التحليل الاستراتيجي" بنجاح.\nالنتيجة: ${score} من 10\nأرغب في طلب الشهادة المعتمدة (الرسوم: 7000 ج.س).`);
         window.open(`https://wa.me/249999240574?text=${msg}`);
     }
 
