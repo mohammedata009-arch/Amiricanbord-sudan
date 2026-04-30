@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار مهارات العرض وإدارة الاجتماعات</title>
+    <title>اختبار هندسة العمليات والتفكير التصميمي</title>
     <style>
         :root {
-            --primary: #8e44ad;
-            --secondary: #2980b9;
-            --accent: #f1c40f;
+            --primary: #16a085;
+            --secondary: #27ae60;
+            --accent: #f39c12;
             --dark: #2c3e50;
             --light: #f4f7f6;
             --white: #ffffff;
             --wa-color: #25D366;
-            --success: #27ae60;
             --error: #e74c3c;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+            background: linear-gradient(135deg, #16a085 0%, #2c3e50 100%);
             margin: 0;
             display: flex;
             justify-content: center;
@@ -34,23 +33,22 @@
             width: 100%;
             max-width: 600px;
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             text-align: center;
-            position: relative;
         }
 
         h1 { color: var(--primary); margin: 0; font-size: 1.5rem; border-bottom: 3px solid var(--accent); display: inline-block; padding-bottom: 5px; }
-        .subtitle { color: #7f8c8d; margin: 10px 0 20px; font-size: 0.85rem; }
+        .subtitle { color: #7f8c8d; margin: 10px 0 20px; font-size: 0.9rem; }
 
-        .progress-container { background: #eee; height: 8px; border-radius: 10px; margin-bottom: 20px; }
-        #progress-bar { background: var(--success); width: 0%; height: 100%; border-radius: 10px; transition: width 0.4s; }
+        .progress-container { background: #eee; height: 10px; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+        #progress-bar { background: var(--secondary); width: 0%; height: 100%; transition: width 0.4s; }
 
-        .question-text { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; min-height: 50px; line-height: 1.5; }
+        .question-text { font-size: 1.25rem; font-weight: bold; margin-bottom: 20px; min-height: 60px; line-height: 1.6; }
 
-        .options-grid { display: grid; gap: 10px; }
+        .options-grid { display: grid; gap: 12px; }
         .opt-btn {
-            padding: 14px;
+            padding: 15px;
             border: 2px solid #ecf0f1;
             border-radius: 12px;
             background: var(--white);
@@ -60,40 +58,39 @@
             transition: 0.2s;
             text-align: right;
         }
-        .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #f4eef8; }
+        .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #e8f8f5; }
         
-        .correct { background: var(--success) !important; color: white; border-color: var(--success) !important; }
+        .correct { background: var(--secondary) !important; color: white; border-color: var(--secondary) !important; }
         .wrong { background: var(--error) !important; color: white; border-color: var(--error) !important; }
 
         #explanation-box {
             display: none;
             margin-top: 15px;
             padding: 15px;
-            border-radius: 10px;
-            background: #e8f4fd;
-            border-right: 5px solid #3498db;
+            border-radius: 12px;
+            background: #fff9db;
+            border-right: 5px solid var(--accent);
             text-align: right;
             font-size: 0.95rem;
             animation: fadeIn 0.5s;
         }
 
         #result-screen { display: none; }
-        .score-circle { width: 90px; height: 90px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: bold; margin: 0 auto 15px; }
+        .score-circle { width: 100px; height: 100px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 20px; color: white; }
 
-        .fee-info {
-            background: #fff9e6;
-            color: #d35400;
-            padding: 12px;
-            border-radius: 10px;
+        .fee-tag {
+            background: #fdf2f2;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 12px;
             font-weight: bold;
-            margin: 15px 0;
-            border: 1px dashed var(--accent);
-            font-size: 1.1rem;
+            margin: 20px 0;
+            border: 2px dashed #e74c3c;
         }
 
-        input[type="text"] { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 10px; margin-bottom: 10px; box-sizing: border-box; text-align: center; font-size: 1rem; }
+        input[type="text"] { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
 
-        .btn-wa { background: var(--wa-color); color: white; border: none; padding: 16px; border-radius: 12px; width: 100%; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        .btn-wa { background: var(--wa-color); color: white; border: none; padding: 18px; border-radius: 12px; width: 100%; font-size: 1.2rem; font-weight: bold; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -102,31 +99,31 @@
 
 <div id="main-card">
     <div id="quiz-screen">
-        <h1>🎓 مهارات العرض وإدارة الاجتماعات</h1>
-        <p class="subtitle">بإشراف الأستاذ محمد طه عطا المنان</p>
+        <h1>🚀 الهندسة الإدارية والتفكير التصميمي</h1>
+        <p class="subtitle">إشراف الأستاذ: محمد طه عطا المنان</p>
         
         <div class="progress-container">
             <div id="progress-bar"></div>
         </div>
 
-        <div id="question" class="question-text">تحميل الأسئلة...</div>
+        <div id="question" class="question-text">جاري تحميل الاختبار...</div>
         <div id="options" class="options-grid"></div>
         <div id="explanation-box"></div>
     </div>
 
     <div id="result-screen">
         <div class="score-circle" id="final-score">0</div>
-        <h2 id="congrats-msg">أحسنتم يا متدربين!</h2>
-        <p>الرجاء إدخال اسمكم الثلاثي لاعتماد الشهادة</p>
+        <h2>أحسنتم يا مبدعين!</h2>
+        <p>يرجى كتابة الاسم الثلاثي لاستخراج الشهادة</p>
         
-        <input type="text" id="trainee-name" placeholder="الاسم الثلاثي للمتدرب">
+        <input type="text" id="trainee-name" placeholder="اسم المتدرب بالكامل">
         
-        <div class="fee-info">
+        <div class="fee-tag">
             🎫 رسوم الشهادة المعتمدة: 7,000 جنيه سوداني
         </div>
 
         <button class="btn-wa" onclick="sendWhatsApp()">
-            إرسال النتيجة وطلب الشهادة
+            إرسال النتيجة واعتماد الشهادة
         </button>
     </div>
 </div>
@@ -137,64 +134,64 @@
 <script>
     const quizData = [
         { 
-            q: "يا متدربين، ما هي أفضل طريقة لجذب انتباه الجمهور في أول دقيقة من العرض؟", 
-            a: ["البدء بالاعتذار عن التوتر", "قراءة السيرة الذاتية كاملة", "طرح سؤال مثير أو ذكر قصة قصيرة"], 
-            c: 2,
-            exp: "شرح: البداية القوية بقصة أو سؤال تكسر الجمود وتجذب انتباه المتدربين فوراً وتجعلهم متشوقين للمتابعة."
-        },
-        { 
-            q: "ماذا تعني قاعدة (6×6) في تصميم شرائح العرض (Slides)؟", 
-            a: ["6 ألوان في 6 شرائح", "6 أسطر كحد أقصى وكل سطر 6 كلمات", "6 صور في كل شريحة"], 
+            q: "يا متدربين، ما هو المفهوم الجوهري لـ 'هندسة العمليات الإدارية' (BPR)؟", 
+            a: ["تحسين الخطوات الحالية ببطء", "إعادة تصميم العمليات جذرياً من الصفر", "زيادة عدد ساعات العمل"], 
             c: 1,
-            exp: "شرح: هذه القاعدة تضمن عدم ازدحام الشريحة بالنصوص، مما يسهل على الجمهور القراءة والتركيز على حديث العارض."
+            exp: "شرح: هندسة العمليات لا ترمم القديم، بل تعيد بناء العملية من الأساس لتحقيق طفرات كبرى في الأداء والجودة."
         },
         { 
-            q: "ما هو الغرض الأساسي من 'أجندة الاجتماع'؟", 
-            a: ["معرفة من سيتغيب", "توضيح النقاط التي ستناقش والالتزام بالوقت", "توزيع المهام بعد الاجتماع"], 
+            q: "ما هي أول خطوة في منهجية 'التفكير التصميمي' (Design Thinking)؟", 
+            a: ["تصميم النموذج الأولي", "التعاطف وفهم احتياجات المستخدم", "اختبار المنتج في السوق"], 
             c: 1,
-            exp: "شرح: الأجندة هي خارطة الطريق التي تمنع تشتت النقاش وتضمن استغلال وقت الاجتماع بفعالية."
+            exp: "شرح: نبدأ دائماً بالتعاطف لوضع أنفسنا مكان المستخدم وفهم مشاكله الحقيقية قبل اقتراح أي حلول."
         },
         { 
-            q: "يا متدربين، أين يجب أن يتجه بصر العارض أثناء الإلقاء؟", 
-            a: ["نحو الشاشة للقراءة منها", "نحو السقف لتجنب التوتر", "توزيع النظرات على جميع الحاضرين (اتصال بصري)"], 
-            c: 2,
-            exp: "شرح: الاتصال البصري يشعر كل فرد في الجمهور بأنه مخاطب شخصياً، مما يزيد من معدل التفاعل."
+            q: "متى تلجأ المؤسسة إلى إعادة هندسة عملياتها (BPR)؟", 
+            a: ["عند وجود بطء شديد وتداخل في المسؤوليات وفشل في الأداء", "عندما تكون الأرباح ممتازة", "عند تغيير أثاث المكاتب"], 
+            c: 0,
+            exp: "شرح: البيروقراطية الزائدة وتجزئة العمليات هي أهم الدوافع التي تستوجب نسف النظام القديم وإعادة هندسته."
         },
         { 
-            q: "في لغة الجسد، ماذا تعني الأيدي المفتوحة أثناء الحديث؟", 
-            a: ["الارتباك والضعف", "الصدق والانفتاح والثقة", "الرغبة في إنهاء العرض"], 
+            q: "يا متدربين، ما الهدف من مرحلة الـ (Prototyping) في التفكير التصميمي؟", 
+            a: ["صناعة نسخة نهائية غالية الثمن", "تجربة الأفكار بسرعة وتكلفة بسيطة للتعلم من الأخطاء", "إبهار المنافسين فقط"], 
             c: 1,
-            exp: "شرح: استخدام اليدين المفتوحتين يعطي انطباعاً بالشفافية والتمكن من المادة العلمية."
+            exp: "شرح: النماذج الأولية تهدف للفشل السريع والرخيص من أجل الوصول للحل الأمثل قبل الاستثمار الضخم."
         },
         { 
-            q: "ما هو التصرف الصحيح عند خروج أحد الأعضاء عن موضوع الاجتماع؟", 
-            a: ["تجاهله تماماً", "مقاطعته بلباقة وإعادته لنقاط الأجندة", "إنهاء الاجتماع فوراً"], 
+            q: "ماذا يقصد بـ 'التفكير التباعدي' في مرحلة ابتكار الحلول؟", 
+            a: ["التركيز على فكرة واحدة فقط", "توليد أكبر قدر ممكن من الأفكار دون قيود أو أحكام", "انتقاد أفكار الآخرين"], 
             c: 1,
-            exp: "شرح: دور مدير الاجتماع هو 'الضبط والسيطرة' لضمان عدم ضياع وقت الحضور في نقاشات جانبية."
+            exp: "شرح: التفكير التباعدي يهدف لفتح آفاق الإبداع واستكشاف كافة الاحتمالات قبل مرحلة التصفية والتركيز."
         },
         { 
-            q: "متى يجب إرسال محضر الاجتماع (Minutes of Meeting) للمشاركين؟", 
-            a: ["بعد شهر من الاجتماع", "في غضون 24-48 ساعة من انتهاء الاجتماع", "عند طلبهم لذلك فقط"], 
-            c: 1,
-            exp: "شرح: الإرسال السريع للمحضر يضمن بقاء القرارات والمهام حية في أذهان المشاركين لبدء التنفيذ."
+            q: "أي من هذه العناصر يعتبر 'ُممكناً' أساسياً لنجاح هندسة العمليات؟", 
+            a: ["تكنولوجيا المعلومات (IT)", "تقليل الإجازات السنوية", "زيادة عدد الاجتماعات الروتينية"], 
+            c: 0,
+            exp: "شرح: التكنولوجيا هي المحرك الذي يكسر القواعد القديمة ويسمح بمشاركة المعلومات والسرعة الفائقة في التنفيذ."
         },
         { 
-            q: "كيف تتعامل مع سؤال لا تعرف إجابته أثناء العرض؟", 
-            a: ["اختراع إجابة من خيالك", "الاعتراف بذكاء السؤال ووعد بالبحث عنه والرد لاحقاً", "توبيخ السائل لأنه قاطعك"], 
+            q: "ماذا نعني بـ 'بيان المشكلة' في مرحلة التعريف (Define)؟", 
+            a: ["قائمة بأسماء الموظفين المخطئين", "صياغة مركزة للمشكلة بناءً على رؤى المستخدمين", "تقرير مالي عن خسائر الشركة"], 
             c: 1,
-            exp: "شرح: الصدق المهني يعزز مصداقيتك؛ فالمدرب الناجح ليس موسوعة، بل هو مرشد متمكن."
+            exp: "شرح: بيان المشكلة يحدد الوجهة التي سيتجه إليها الابتكار لضمان حل المشكلة الحقيقية للإنسان."
         },
         { 
-            q: "ما هي أهمية الخلاصة (Conclusion) في نهاية العرض التقديمي؟", 
-            a: ["تكرار كل ما قيل بالتفصيل", "تثبيت الأفكار الرئيسية وتقديم دعوة للعمل (Call to Action)", "إعلان موعد الغداء"], 
-            c: 1,
-            exp: "شرح: الخلاصة هي آخر ما يعلق في ذهن الجمهور، ويجب أن تحتوي على 'ماذا نفعل الآن؟'."
+            q: "الفرق بين التحسين المستمر (Kaizen) وإعادة الهندسة (BPR) هو:", 
+            a: ["BPR تغيير جذري وشامل، بينما كايزن تغيير تدريجي", "كايزن للمكاتب وBPR للمصانع", "لا يوجد فرق بينهما"], 
+            c: 0,
+            exp: "شرح: كايزن يرمم ويحسن، أما BPR فتهدم وتبني من جديد لتحقيق نتائج استثنائية."
         },
         { 
-            q: "يا متدربين، ما هو الوقت المثالي لبداية الاجتماع؟", 
-            a: ["عند اكتمال حضور جميع الموظفين", "في الموعد المحدد تماماً لاحترام الوقت", "بعد 15 دقيقة من الموعد المحدد"], 
+            q: "يا متدربين، لماذا نركز على 'المستخدم' في التفكير التصميمي؟", 
+            a: ["لأنه يدفع المال فقط", "لضمان ابتكار حلول إنسانية تلبي احتياجاته الحقيقية", "لأنه دائماً على حق"], 
             c: 1,
-            exp: "شرح: البدء في الموعد يرسخ ثقافة الانضباط ويحترم الأشخاص الذين حضروا في وقتهم."
+            exp: "شرح: التفكير التصميمي هو منهجية متمحورة حول الإنسان؛ فالحل الذي لا يخدم المستخدم هو حل فاشل استراتيجياً."
+        },
+        { 
+            q: "في إعادة الهندسة، يتم التركيز على (العمليات) بدلاً من:", 
+            a: ["العملاء", "الإدارات والوظائف المنعزلة", "التقنية الحديثة"], 
+            c: 1,
+            exp: "شرح: BPR تكسر الحواجز بين الأقسام وتنظر للعملية كتدفق مستمر يحقق قيمة للعميل من البداية للنهاية."
         }
     ];
 
@@ -244,7 +241,7 @@
         setTimeout(() => {
             current++;
             renderQuestion();
-        }, 4500); 
+        }, 5000); 
     }
 
     function showResults() {
@@ -255,9 +252,9 @@
 
     function sendWhatsApp() {
         const name = document.getElementById("trainee-name").value;
-        if (!name) { alert("من فضلك اكتب اسمك الثلاثي يا متدرب"); return; }
+        if (!name) { alert("لطفاً اكتبوا أسماءكم يا متدربين"); return; }
         
-        const msg = encodeURIComponent(`السلام عليكم أستاذ محمد طه،\nأنا المتدرب: ${name}\nأتممت اختبار "مهارات العرض والاجتماعات" بنجاح.\nالنتيجة: ${score} من 10\nأرغب في استلام الشهادة المعتمدة (الرسوم: 7000 ج.س).`);
+        const msg = encodeURIComponent(`السلام عليكم أستاذ محمد طه،\nأنا المتدرب: ${name}\nأكملت اختبار "هندسة العمليات والتفكير التصميمي" بنجاح.\nالنتيجة: ${score} من 10\nأرغب في الحصول على الشهادة المعتمدة (الرسوم: 7000 ج.س).`);
         window.open(`https://wa.me/249999240574?text=${msg}`);
     }
 
