@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار هندسة العمليات والتفكير التصميمي</title>
+    <title>اختبار التفاوض وأخلاقيات العمل</title>
     <style>
         :root {
-            --primary: #16a085;
-            --secondary: #27ae60;
-            --accent: #f39c12;
-            --dark: #2c3e50;
-            --light: #f4f7f6;
+            --primary: #2c3e50;
+            --secondary: #c0392b;
+            --success: #27ae60;
+            --info: #2980b9;
             --white: #ffffff;
             --wa-color: #25D366;
-            --error: #e74c3c;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #16a085 0%, #2c3e50 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: var(--dark);
+            color: var(--primary);
             padding: 10px;
         }
 
@@ -33,53 +31,53 @@
             width: 100%;
             max-width: 600px;
             padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             text-align: center;
         }
 
-        h1 { color: var(--primary); margin: 0; font-size: 1.5rem; border-bottom: 3px solid var(--accent); display: inline-block; padding-bottom: 5px; }
-        .subtitle { color: #7f8c8d; margin: 10px 0 20px; font-size: 0.9rem; }
+        h1 { color: var(--secondary); margin: 0; font-size: 1.6rem; border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+        .subtitle { color: #7f8c8d; margin: 10px 0 20px; font-size: 0.9rem; font-weight: bold; }
 
         .progress-container { background: #eee; height: 10px; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-        #progress-bar { background: var(--secondary); width: 0%; height: 100%; transition: width 0.4s; }
+        #progress-bar { background: var(--success); width: 0%; height: 100%; transition: width 0.4s; }
 
-        .question-text { font-size: 1.25rem; font-weight: bold; margin-bottom: 20px; min-height: 60px; line-height: 1.6; }
+        .question-text { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; min-height: 60px; line-height: 1.6; }
 
         .options-grid { display: grid; gap: 12px; }
         .opt-btn {
             padding: 15px;
-            border: 2px solid #ecf0f1;
+            border: 2px solid #bdc3c7;
             border-radius: 12px;
             background: var(--white);
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             transition: 0.2s;
             text-align: right;
         }
-        .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #e8f8f5; }
+        .opt-btn:hover:not(:disabled) { border-color: var(--secondary); background: #fdf2f2; }
         
-        .correct { background: var(--secondary) !important; color: white; border-color: var(--secondary) !important; }
-        .wrong { background: var(--error) !important; color: white; border-color: var(--error) !important; }
+        .correct { background: var(--success) !important; color: white; border-color: var(--success) !important; }
+        .wrong { background: var(--secondary) !important; color: white; border-color: var(--secondary) !important; }
 
         #explanation-box {
             display: none;
             margin-top: 15px;
             padding: 15px;
             border-radius: 12px;
-            background: #fff9db;
-            border-right: 5px solid var(--accent);
+            background: #ebf5fb;
+            border-right: 5px solid var(--info);
             text-align: right;
             font-size: 0.95rem;
             animation: fadeIn 0.5s;
         }
 
         #result-screen { display: none; }
-        .score-circle { width: 100px; height: 100px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 20px; color: white; }
+        .score-circle { width: 100px; height: 100px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 20px; color: white; box-shadow: 0 5px 15px rgba(192, 57, 43, 0.3); }
 
         .fee-tag {
-            background: #fdf2f2;
+            background: #fff5f5;
             color: #c0392b;
             padding: 15px;
             border-radius: 12px;
@@ -88,9 +86,10 @@
             border: 2px dashed #e74c3c;
         }
 
-        input[type="text"] { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
+        input[type="text"] { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; margin-bottom: 15px; text-align: center; font-size: 1.1rem; box-sizing: border-box; }
 
-        .btn-wa { background: var(--wa-color); color: white; border: none; padding: 18px; border-radius: 12px; width: 100%; font-size: 1.2rem; font-weight: bold; cursor: pointer; }
+        .btn-wa { background: var(--wa-color); color: white; border: none; padding: 18px; border-radius: 12px; width: 100%; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-wa:hover { background: #1eb954; transform: scale(1.02); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -99,31 +98,31 @@
 
 <div id="main-card">
     <div id="quiz-screen">
-        <h1>🚀 الهندسة الإدارية والتفكير التصميمي</h1>
-        <p class="subtitle">إشراف الأستاذ: محمد طه عطا المنان</p>
+        <h1>اختبار التفاوض وأخلاقيات العمل</h1>
+        <p class="subtitle">منصة البرامج التخصصية - م. محمد طه عطا المنان</p>
         
         <div class="progress-container">
             <div id="progress-bar"></div>
         </div>
 
-        <div id="question" class="question-text">جاري تحميل الاختبار...</div>
+        <div id="question" class="question-text">جاري التحميل...</div>
         <div id="options" class="options-grid"></div>
         <div id="explanation-box"></div>
     </div>
 
     <div id="result-screen">
         <div class="score-circle" id="final-score">0</div>
-        <h2>أحسنتم يا مبدعين!</h2>
-        <p>يرجى كتابة الاسم الثلاثي لاستخراج الشهادة</p>
+        <h2>أحسنتم يا متدربين!</h2>
+        <p>الرجاء إدخال اسمكم الثلاثي لاعتماد الشهادة</p>
         
-        <input type="text" id="trainee-name" placeholder="اسم المتدرب بالكامل">
+        <input type="text" id="trainee-name" placeholder="الاسم الكامل للمتدرب">
         
         <div class="fee-tag">
-            🎫 رسوم الشهادة المعتمدة: 7,000 جنيه سوداني
+            📜 رسوم الشهادة المعتمدة: 7,000 جنيه سوداني
         </div>
 
         <button class="btn-wa" onclick="sendWhatsApp()">
-            إرسال النتيجة واعتماد الشهادة
+            إرسال النتيجة وطلب الشهادة
         </button>
     </div>
 </div>
@@ -134,64 +133,64 @@
 <script>
     const quizData = [
         { 
-            q: "يا متدربين، ما هو المفهوم الجوهري لـ 'هندسة العمليات الإدارية' (BPR)؟", 
-            a: ["تحسين الخطوات الحالية ببطء", "إعادة تصميم العمليات جذرياً من الصفر", "زيادة عدد ساعات العمل"], 
+            q: "يا متدربين، ما هو المبدأ الأساسي في 'تفاوض التكامل' (Integrative) الموضح في المحتوى؟", 
+            a: ["تحقيق الفوز لطرف واحد فقط", "البحث عن حلول تحقق المنفعة المتبادلة (الكل رابح)", "استخدام الضغط لإجبار الطرف الآخر"], 
             c: 1,
-            exp: "شرح: هندسة العمليات لا ترمم القديم، بل تعيد بناء العملية من الأساس لتحقيق طفرات كبرى في الأداء والجودة."
+            exp: "شرح: تفاوض التكامل يركز على توسيع القيمة وبناء علاقات مستدامة من خلال استراتيجية (اربح-اربح)."
         },
         { 
-            q: "ما هي أول خطوة في منهجية 'التفكير التصميمي' (Design Thinking)؟", 
-            a: ["تصميم النموذج الأولي", "التعاطف وفهم احتياجات المستخدم", "اختبار المنتج في السوق"], 
+            q: "وفقاً لأخلاقيات العمل، ماذا تعني 'الأمانة المهنية' تجاه معلومات المؤسسة؟", 
+            a: ["نشر الأسرار لزيادة الشفافية", "الحفاظ على سرية البيانات وعدم استغلالها شخصياً", "مشاركة المعلومات مع المنافسين"], 
             c: 1,
-            exp: "شرح: نبدأ دائماً بالتعاطف لوضع أنفسنا مكان المستخدم وفهم مشاكله الحقيقية قبل اقتراح أي حلول."
+            exp: "شرح: الأمانة تقتضي صيانة خصوصية العمل وحماية معلوماته باعتبارها عهدة مهنية."
         },
         { 
-            q: "متى تلجأ المؤسسة إلى إعادة هندسة عملياتها (BPR)؟", 
-            a: ["عند وجود بطء شديد وتداخل في المسؤوليات وفشل في الأداء", "عندما تكون الأرباح ممتازة", "عند تغيير أثاث المكاتب"], 
+            q: "لماذا يعد 'الاستماع النشط' مهارة تفاوضية وأخلاقية هامة؟", 
+            a: ["لانتظار الفرصة للرد بقوة", "لفهم احتياجات الطرف الآخر وبناء جسور الثقة", "لتسجيل أخطاء الطرف الآخر"], 
+            c: 1,
+            exp: "شرح: الاستماع الفعال يساعد في اكتشاف المصالح الحقيقية للطرف الآخر ويظهر الاحترام المتبادل."
+        },
+        { 
+            q: "ما هو التصرف الأخلاقي السليم عند مواجهة 'تضارب مصالح' في العمل؟", 
+            a: ["تجاهل الأمر تماماً", "الإفصاح الفوري للإدارة والانسحاب من القرار", "العمل سراً لموازنة المصالح"], 
+            c: 1,
+            exp: "شرح: النزاهة تقتضي الشفافية الكاملة والابتعاد عن أي موقف يؤثر على حيادية القرار المهني."
+        },
+        { 
+            q: "أي من الآتي يعتبر سلوكاً 'غير أخلاقي' في عملية التفاوض؟", 
+            a: ["تقديم معلومات مضللة للتأثير على القرار", "طلب مهلة للتفكير", "اقتراح بدائل جديدة للحل"], 
             c: 0,
-            exp: "شرح: البيروقراطية الزائدة وتجزئة العمليات هي أهم الدوافع التي تستوجب نسف النظام القديم وإعادة هندسته."
+            exp: "شرح: التضليل والخداع يدمران الثقة المهنية ويتنافيان مع معايير التفاوض الأخلاقي."
         },
         { 
-            q: "يا متدربين، ما الهدف من مرحلة الـ (Prototyping) في التفكير التصميمي؟", 
-            a: ["صناعة نسخة نهائية غالية الثمن", "تجربة الأفكار بسرعة وتكلفة بسيطة للتعلم من الأخطاء", "إبهار المنافسين فقط"], 
+            q: "ما أهمية 'العدالة والإنصاف' داخل بيئة العمل؟", 
+            a: ["لتقليل المصاريف الإدارية", "لخلق بيئة تنافسية شريفة وزيادة الولاء", "لإرضاء الجهات الخارجية فقط"], 
             c: 1,
-            exp: "شرح: النماذج الأولية تهدف للفشل السريع والرخيص من أجل الوصول للحل الأمثل قبل الاستثمار الضخم."
+            exp: "شرح: العدالة تضمن بيئة عمل صحية وتدفع المتدربين والموظفين لبذل أقصى طاقاتهم."
         },
         { 
-            q: "ماذا يقصد بـ 'التفكير التباعدي' في مرحلة ابتكار الحلول؟", 
-            a: ["التركيز على فكرة واحدة فقط", "توليد أكبر قدر ممكن من الأفكار دون قيود أو أحكام", "انتقاد أفكار الآخرين"], 
+            q: "ماذا يعني مفهوم 'المرونة الأخلاقية' في التفاوض؟", 
+            a: ["التنازل عن القيم مقابل الصفقة", "تعديل الحلول والمواقف دون المساس بالقيم", "تغيير المبادئ حسب الطرف الآخر"], 
             c: 1,
-            exp: "شرح: التفكير التباعدي يهدف لفتح آفاق الإبداع واستكشاف كافة الاحتمالات قبل مرحلة التصفية والتركيز."
+            exp: "شرح: المرونة تعني الانفتاح على طرق مختلفة للوصول للهدف مع الالتزام التام بالنزاهة."
         },
         { 
-            q: "أي من هذه العناصر يعتبر 'ُممكناً' أساسياً لنجاح هندسة العمليات؟", 
-            a: ["تكنولوجيا المعلومات (IT)", "تقليل الإجازات السنوية", "زيادة عدد الاجتماعات الروتينية"], 
+            q: "يا متدربين، ما هو التصرف الأمثل عند اكتشاف سلوك غير أخلاقي من زميل؟", 
+            a: ["التستر عليه", "نصحه أولاً ثم الإبلاغ حسب اللوائح", "نشر الخبر بين الزملاء"], 
+            c: 1,
+            exp: "شرح: المسؤولية المهنية تتطلب حماية المؤسسة وتطبيق اللوائح لضمان نزاهة بيئة العمل."
+        },
+        { 
+            q: "لماذا يعتبر الالتزام بالاتفاق بعد انتهاء التفاوض ضرورة أخلاقية؟", 
+            a: ["لبناء سمعة مهنية طيبة وضمان استمرار العلاقات", "لأنه لا يمكن تغيير الاتفاق أبداً", "خوفاً من العقوبات فقط"], 
             c: 0,
-            exp: "شرح: التكنولوجيا هي المحرك الذي يكسر القواعد القديمة ويسمح بمشاركة المعلومات والسرعة الفائقة في التنفيذ."
+            exp: "شرح: الوفاء بالعهود هو رأسمال المحترف الحقيقي والمؤسسة الناجحة."
         },
         { 
-            q: "ماذا نعني بـ 'بيان المشكلة' في مرحلة التعريف (Define)؟", 
-            a: ["قائمة بأسماء الموظفين المخطئين", "صياغة مركزة للمشكلة بناءً على رؤى المستخدمين", "تقرير مالي عن خسائر الشركة"], 
+            q: "أي من القيم التالية تمثل 'العمود الفقري' لأخلاقيات المهنة؟", 
+            a: ["الربح السريع", "النزاهة والمسؤولية والاحترام", "الطاعة العمياء للأخطاء"], 
             c: 1,
-            exp: "شرح: بيان المشكلة يحدد الوجهة التي سيتجه إليها الابتكار لضمان حل المشكلة الحقيقية للإنسان."
-        },
-        { 
-            q: "الفرق بين التحسين المستمر (Kaizen) وإعادة الهندسة (BPR) هو:", 
-            a: ["BPR تغيير جذري وشامل، بينما كايزن تغيير تدريجي", "كايزن للمكاتب وBPR للمصانع", "لا يوجد فرق بينهما"], 
-            c: 0,
-            exp: "شرح: كايزن يرمم ويحسن، أما BPR فتهدم وتبني من جديد لتحقيق نتائج استثنائية."
-        },
-        { 
-            q: "يا متدربين، لماذا نركز على 'المستخدم' في التفكير التصميمي؟", 
-            a: ["لأنه يدفع المال فقط", "لضمان ابتكار حلول إنسانية تلبي احتياجاته الحقيقية", "لأنه دائماً على حق"], 
-            c: 1,
-            exp: "شرح: التفكير التصميمي هو منهجية متمحورة حول الإنسان؛ فالحل الذي لا يخدم المستخدم هو حل فاشل استراتيجياً."
-        },
-        { 
-            q: "في إعادة الهندسة، يتم التركيز على (العمليات) بدلاً من:", 
-            a: ["العملاء", "الإدارات والوظائف المنعزلة", "التقنية الحديثة"], 
-            c: 1,
-            exp: "شرح: BPR تكسر الحواجز بين الأقسام وتنظر للعملية كتدفق مستمر يحقق قيمة للعميل من البداية للنهاية."
+            exp: "شرح: هذه القيم الثلاث هي أساس استقرار أي منظمة مهنية ونجاحها المستدام."
         }
     ];
 
@@ -252,9 +251,9 @@
 
     function sendWhatsApp() {
         const name = document.getElementById("trainee-name").value;
-        if (!name) { alert("لطفاً اكتبوا أسماءكم يا متدربين"); return; }
+        if (!name) { alert("من فضلك اكتب اسمك الكامل يا متدرب"); return; }
         
-        const msg = encodeURIComponent(`السلام عليكم أستاذ محمد طه،\nأنا المتدرب: ${name}\nأكملت اختبار "هندسة العمليات والتفكير التصميمي" بنجاح.\nالنتيجة: ${score} من 10\nأرغب في الحصول على الشهادة المعتمدة (الرسوم: 7000 ج.س).`);
+        const msg = encodeURIComponent(`السلام عليكم م. محمد طه،\nأنا المتدرب: ${name}\nأكملت اختبار "التفاوض وأخلاقيات العمل" بنجاح.\nالنتيجة: ${score} من 10\nأرغب في استلام الشهادة المعتمدة (الرسوم: 7000 ج.س).`);
         window.open(`https://wa.me/249999240574?text=${msg}`);
     }
 
